@@ -1,3 +1,5 @@
+package net.gebski.FuncScalaSandbox.Chapter2
+
 import org.scalatest.FunSpec
 
 class FibonacciSpec extends FunSpec {

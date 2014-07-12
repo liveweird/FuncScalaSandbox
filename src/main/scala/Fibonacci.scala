@@ -1,3 +1,5 @@
+package net.gebski.FuncScalaSandbox.Chapter2
+
 import scala.annotation.tailrec
 
 object Fibonacci {
