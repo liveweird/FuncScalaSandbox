@@ -40,4 +40,34 @@ class ListOpsSpec extends FunSpec {
       assert(0 == replaced.zip(expected).count{case (x,y) => x != y})
     }
   }
+
+  describe("Dropping first n elements") {
+    it("on empty lists return nothing") {
+      assert(0 == ListOps.drop(List(), 3).length)
+    }
+
+    it("on list shorter than n returns nothing") {
+      assert(0 == ListOps.drop(1 :: 2 :: 3 :: Nil, 4).length)
+    }
+
+    it("on list as long as n returns nothing") {
+      assert(0 == ListOps.drop(1 :: 2 :: 3 :: Nil, 3).length)
+    }
+
+    it("if n <= 0 list is returned unchanged") {
+      val list = 1 :: 2 :: 3 :: 4 :: 5 :: 6 :: Nil
+      val expected = 1 :: 2 :: 3 :: 4 :: 5 :: 6 :: Nil
+      val result = ListOps.drop(list, -3)
+      assert(6 == result.length)
+      assert(0 == result.zip(expected).count{case (x,y) => x != y})
+    }
+
+    it("if n < than list's lenght, shortened list is returned") {
+      val list = 1 :: 2 :: 3 :: 4 :: 5 :: 6 :: Nil
+      val expected = 4 :: 5 :: 6 :: Nil
+      val result = ListOps.drop(list, 3)
+      assert(3 == result.length)
+      assert(0 == result.zip(expected).count{case (x,y) => x != y})
+    }
+  }
 }

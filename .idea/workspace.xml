@@ -63,21 +63,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ListOps.scala" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ListOps.scala" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ListOps.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45033112" vertical-offset="0" max-vertical-offset="629">
-              <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ListOpsSpec.scala" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ListOpsSpec.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/scala/ListOpsSpec.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
-              <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.6903973" vertical-offset="739" max-vertical-offset="1343">
+              <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -103,8 +103,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/Composition.scala" />
         <option value="$PROJECT_DIR$/src/test/scala/ListSpec.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/List.scala" />
-        <option value="$PROJECT_DIR$/src/test/scala/ListOpsSpec.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ListOps.scala" />
+        <option value="$PROJECT_DIR$/src/test/scala/ListOpsSpec.scala" />
       </list>
     </option>
   </component>
@@ -308,22 +308,13 @@
       <setting name="testName" value="" />
       <setting name="testKind" value="Class" />
       <setting name="showProgressMessages" value="true" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ScalaTests in 'scala'" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true" nameIsGenerated="true">
-      <module name="funcscalasandbox" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="file://$PROJECT_DIR$" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="All in package" />
-      <setting name="showProgressMessages" value="true" />
-      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -352,6 +343,21 @@
       <setting name="searchForTest" value="Across module dependencies" />
       <setting name="testName" value="" />
       <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ListOpsSpec.Dropping first n elements if n &lt;= 0 list is returned unchanged" type="ScalaTestRunConfiguration" factoryName="ScalaTest" temporary="true">
+      <module name="funcscalasandbox" />
+      <setting name="path" value="net.gebski.FuncScalaSandbox.Chapter3.ListOpsSpec" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="Dropping first n elements if n &lt;= 0 list is returned unchanged" />
+      <setting name="testKind" value="Test name" />
       <setting name="showProgressMessages" value="true" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
@@ -441,17 +447,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="ScalaTest.CompositionSpec" />
       <item index="1" class="java.lang.String" itemvalue="ScalaTest.ListOpsSpec" />
-      <item index="2" class="java.lang.String" itemvalue="ScalaTest.ScalaTests in 'scala'" />
-      <item index="3" class="java.lang.String" itemvalue="ScalaTest.FibonacciSpec" />
-      <item index="4" class="java.lang.String" itemvalue="ScalaTest.IsSortedSpec" />
+      <item index="2" class="java.lang.String" itemvalue="ScalaTest.FibonacciSpec" />
+      <item index="3" class="java.lang.String" itemvalue="ScalaTest.IsSortedSpec" />
+      <item index="4" class="java.lang.String" itemvalue="ScalaTest.ListOpsSpec.Dropping first n elements if n &lt;= 0 list is returned unchanged" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="ScalaTest.ListOpsSpec" />
-        <item index="1" class="java.lang.String" itemvalue="ScalaTest.IsSortedSpec" />
-        <item index="2" class="java.lang.String" itemvalue="ScalaTest.FibonacciSpec" />
-        <item index="3" class="java.lang.String" itemvalue="ScalaTest.CompositionSpec" />
-        <item index="4" class="java.lang.String" itemvalue="ScalaTest.ScalaTests in 'scala'" />
+        <item index="1" class="java.lang.String" itemvalue="ScalaTest.ListOpsSpec.Dropping first n elements if n &lt;= 0 list is returned unchanged" />
+        <item index="2" class="java.lang.String" itemvalue="ScalaTest.IsSortedSpec" />
+        <item index="3" class="java.lang.String" itemvalue="ScalaTest.FibonacciSpec" />
+        <item index="4" class="java.lang.String" itemvalue="ScalaTest.CompositionSpec" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="JUnit" default="true" selected="false">
@@ -962,18 +968,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/scala/ListOpsSpec.scala">
+    <entry file="file://$PROJECT_DIR$/src/main/scala/ListOps.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/ListOps.scala">
+    <entry file="file://$PROJECT_DIR$/src/test/scala/ListOpsSpec.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45033112" vertical-offset="0" max-vertical-offset="629">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.6903973" vertical-offset="739" max-vertical-offset="1343">
+          <caret line="68" column="14" selection-start-line="68" selection-start-column="14" selection-end-line="68" selection-end-column="14" />
           <folding />
         </state>
       </provider>

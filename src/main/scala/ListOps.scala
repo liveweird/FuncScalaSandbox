@@ -18,7 +18,12 @@ object ListOps {
   }
 
   def drop[A](l: List[A], n: Int): List[A] = {
-    l
+    if (n <= 0) l
+    else
+    l match {
+      case List() => l
+      case x :: y => drop(y, n - 1)
+    }
   }
 
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = {
