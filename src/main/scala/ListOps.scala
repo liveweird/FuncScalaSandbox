@@ -12,8 +12,8 @@ object ListOps {
   def setHead[A](l: List[A], a: A) : List[A] = {
     l match {
       case List() => l
-      case x :: nil  => List(a)
-      case x :: y => a :: y
+      case List(x) => List(a)
+      case x :: y => y.+:(a)
     }
   }
 
@@ -27,7 +27,10 @@ object ListOps {
   }
 
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] = {
-    l
+    l match {
+      case List() => l
+      case x :: y => if (f(x)) dropWhile(y, f) else l
+    }
   }
 
   def init[A](l: List[A]): List[A] = {
