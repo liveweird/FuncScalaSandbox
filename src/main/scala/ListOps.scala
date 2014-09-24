@@ -34,6 +34,10 @@ object ListOps {
   }
 
   def init[A](l: List[A]): List[A] = {
-    l
+    l match {
+      case List() => l
+      case List(x) => List()
+      case x :: y => init(y).+:(x)
+    }
   }
 }

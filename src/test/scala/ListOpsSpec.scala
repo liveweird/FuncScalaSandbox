@@ -109,7 +109,24 @@ class ListOpsSpec extends FunSpec {
     it("all elements meet conditions, result is empty") {
       val list = 1 :: 2 :: 3 :: 4 :: 5 :: 6 :: Nil
       val expected = List()
-      var result = ListOps.dropWhile(list, (p: Int) => true)
+      val result = ListOps.dropWhile(list, (p: Int) => true)
+      assertListCmp(expected, result)
+    }
+  }
+
+  describe("Dropping only the last element of the collection") {
+    it("on empty list return nothing") {
+      assert(0 == ListOps.init(List()).length)
+    }
+
+    it("on list with 1 element, returns nothing") {
+      assert(0 == ListOps.init(1 :: Nil).length)
+    }
+
+    it("on list with more than 1 element, returns all elements but the last one") {
+      val list = 1 :: 2 :: 3 :: 4 :: 5 :: 6 :: Nil
+      val expected = 1 :: 2 :: 3 :: 4 :: 5 :: Nil
+      val result = ListOps.init(list)
       assertListCmp(expected, result)
     }
   }
