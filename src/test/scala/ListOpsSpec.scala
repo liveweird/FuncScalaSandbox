@@ -130,4 +130,18 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, result)
     }
   }
+
+  describe("Calculating the length of list, using foldRight") {
+    it ("on empty list it's 0") {
+      assert(0 == ListOps.length(List()))
+    }
+
+    it ("on list with 1 element it's just 1") {
+      assert(1 == ListOps.length(1 :: Nil))
+    }
+
+    it ("on list with n elements, it's n") {
+      assert(4 == ListOps.length(1 :: 10 :: 100 :: 1000 :: Nil))
+    }
+  }
 }
