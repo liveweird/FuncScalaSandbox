@@ -193,5 +193,24 @@ class ListOpsSpec extends FunSpec {
         assert(0 == ListOps.productFoldLeft(1 :: 5 :: 0 :: 6 :: Nil))
       }
     }
+
+    describe("Reverse") {
+      it ("Empty list reversed is an empty list") {
+        assert(Nil == ListOps.reverse(Nil))
+      }
+
+      it ("1 elem-long list reversed is itself") {
+        val list = 1 :: Nil
+        val result = ListOps.reverse(list)
+        assertListCmp(list, result)
+      }
+
+      it ("longer list reversed is proper") {
+        val list = 1 :: 2 :: 3 :: 4 :: 5 :: Nil
+        val expected = 5 :: 4 :: 3 :: 2 :: 1 :: Nil
+        val result = ListOps.reverse(list)
+        assertListCmp(expected, result)
+      }
+    }
   }
 }

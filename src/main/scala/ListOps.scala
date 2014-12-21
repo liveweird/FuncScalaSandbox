@@ -75,4 +75,12 @@ object ListOps {
       case ds_ => foldLeft(ds_, 1) {(a: Int, b: Int) => { a * b } }
     }
   }
+
+  def reverse[A](ls: List[A]): List[A] = {
+    ls match {
+      case Nil => Nil
+      case x :: Nil => x :: Nil
+      case x :: xs => reverse(xs) :+ x
+    }
+  }
 }
