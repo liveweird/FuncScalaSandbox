@@ -146,6 +146,20 @@ class ListOpsSpec extends FunSpec {
       }
     }
 
+    describe("using foldRight2") {
+      it ("on empty list it's 0") {
+        assert(0 == ListOps.lengthFoldRight2(List()))
+      }
+
+      it ("on list with 1 element it's just 1") {
+        assert(1 == ListOps.lengthFoldRight2(1 :: Nil))
+      }
+
+      it ("on list with n elements, it's n") {
+        assert(4 == ListOps.lengthFoldRight2(1 :: 10 :: 100 :: 1000 :: Nil))
+      }
+    }
+
     describe("using foldLeft") {
       it ("on empty list it's 0") {
         assert(0 == ListOps.lengthFoldLeft(List()))
@@ -159,10 +173,24 @@ class ListOpsSpec extends FunSpec {
         assert(4 == ListOps.lengthFoldLeft(1 :: 10 :: 100 :: 1000 :: Nil))
       }
     }
+
+    describe("using foldLeft2") {
+      it ("on empty list it's 0") {
+        assert(0 == ListOps.lengthFoldLeft2(List()))
+      }
+
+      it ("on list with 1 element it's just 1") {
+        assert(1 == ListOps.lengthFoldLeft2(1 :: Nil))
+      }
+
+      it ("on list with n elements, it's n") {
+        assert(4 == ListOps.lengthFoldLeft2(1 :: 10 :: 100 :: 1000 :: Nil))
+      }
+    }
   }
 
-  describe("Calculations using foldLeft") {
-    describe("Sum") {
+  describe("Calculating sum of elements in list") {
+    describe("using foldLeft") {
       it ("Empty list returns 0") {
         assert(0 == ListOps.sumFoldLeft(List()))
       }
@@ -176,7 +204,51 @@ class ListOpsSpec extends FunSpec {
       }
     }
 
-    describe("Product") {
+    describe("using foldLeft2") {
+      it ("Empty list returns 0") {
+        assert(0 == ListOps.sumFoldLeft2(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.sumFoldLeft2(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual sum") {
+        assert(10 == ListOps.sumFoldLeft2(1 :: 3 :: 6 :: Nil))
+      }
+    }
+
+    describe("using foldRight") {
+      it ("Empty list returns 0") {
+        assert(0 == ListOps.sumFoldRight(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.sumFoldRight(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual sum") {
+        assert(10 == ListOps.sumFoldRight(1 :: 3 :: 6 :: Nil))
+      }
+    }
+
+    describe("using foldRight2") {
+      it ("Empty list returns 0") {
+        assert(0 == ListOps.sumFoldRight2(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.sumFoldRight2(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual sum") {
+        assert(10 == ListOps.sumFoldRight2(1 :: 3 :: 6 :: Nil))
+      }
+    }
+  }
+
+  describe("Calculating product of elements in list") {
+    describe("using foldLeft") {
       it ("Empty lists return 0") {
         assert(0 == ListOps.productFoldLeft(List()))
       }
@@ -194,23 +266,77 @@ class ListOpsSpec extends FunSpec {
       }
     }
 
-    describe("Reverse") {
-      it ("Empty list reversed is an empty list") {
-        assert(Nil == ListOps.reverse(Nil))
+    describe("using foldLeft2") {
+      it ("Empty lists return 0") {
+        assert(0 == ListOps.productFoldLeft2(List()))
       }
 
-      it ("1 elem-long list reversed is itself") {
-        val list = 1 :: Nil
-        val result = ListOps.reverse(list)
-        assertListCmp(list, result)
+      it ("One value is just this value") {
+        assert(4 == ListOps.productFoldLeft2(4 :: Nil))
       }
 
-      it ("longer list reversed is proper") {
-        val list = 1 :: 2 :: 3 :: 4 :: 5 :: Nil
-        val expected = 5 :: 4 :: 3 :: 2 :: 1 :: Nil
-        val result = ListOps.reverse(list)
-        assertListCmp(expected, result)
+      it ("More than one value returns the actual product") {
+        assert(30 == ListOps.productFoldLeft2(1 :: 5 :: 6 :: Nil))
+      }
+
+      it ("Zero nullifies the result") {
+        assert(0 == ListOps.productFoldLeft2(1 :: 5 :: 0 :: 6 :: Nil))
+      }
+    }
+
+    describe("using foldRight") {
+      it ("Empty lists return 0") {
+        assert(0 == ListOps.productFoldRight(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.productFoldRight(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual product") {
+        assert(30 == ListOps.productFoldRight(1 :: 5 :: 6 :: Nil))
+      }
+
+      it ("Zero nullifies the result") {
+        assert(0 == ListOps.productFoldRight(1 :: 5 :: 0 :: 6 :: Nil))
+      }
+    }
+
+    describe("using foldRight2") {
+      it ("Empty lists return 0") {
+        assert(0 == ListOps.productFoldRight2(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.productFoldRight2(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual product") {
+        assert(30 == ListOps.productFoldRight2(1 :: 5 :: 6 :: Nil))
+      }
+
+      it ("Zero nullifies the result") {
+        assert(0 == ListOps.productFoldRight2(1 :: 5 :: 0 :: 6 :: Nil))
       }
     }
   }
+
+  describe("Reverse") {
+    it ("Empty list reversed is an empty list") {
+      assert(Nil == ListOps.reverse(Nil))
+    }
+
+    it ("1 elem-long list reversed is itself") {
+      val list = 1 :: Nil
+      val result = ListOps.reverse(list)
+      assertListCmp(list, result)
+    }
+
+    it ("longer list reversed is proper") {
+      val list = 1 :: 2 :: 3 :: 4 :: 5 :: Nil
+      val expected = 5 :: 4 :: 3 :: 2 :: 1 :: Nil
+      val result = ListOps.reverse(list)
+      assertListCmp(expected, result)
+    }
+}
 }

@@ -53,6 +53,17 @@ object ListOps {
     foldRight(as, 0) {(a: A, b: Int) => { b + 1 }}
   }
 
+  def sumFoldRight(ints: List[Int]): Int = {
+    foldRight(ints, 0) {(a: Int, b: Int) => { a + b } }
+  }
+
+  def productFoldRight(ds: List[Int]): Int = {
+    ds match {
+      case Nil => 0
+      case ds_ => foldRight(ds_, 1) {(a: Int, b: Int) => { a * b } }
+    }
+  }
+
   @tailrec
   def foldLeft[A,B](as: List[A], z: B)(f: (B, A) => B): B = {
     as match {
@@ -81,6 +92,42 @@ object ListOps {
       case Nil => Nil
       case x :: Nil => x :: Nil
       case x :: xs => reverse(xs) :+ x
+    }
+  }
+
+  def foldRight2[A,B](as: List[A], z: B)(f: (A, B) => B): B =
+  ???
+
+  def foldLeft2[A,B](as: List[A], z: B)(f: (B, A) => B): B =
+  ???
+
+  def lengthFoldRight2[A](as: List[A]): Int = {
+    foldRight2(as, 0) {(a: A, b: Int) => { b + 1 }}
+  }
+
+  def sumFoldRight2(ints: List[Int]): Int = {
+    foldRight2(ints, 0) {(a: Int, b: Int) => { a + b } }
+  }
+
+  def productFoldRight2(ds: List[Int]): Int = {
+    ds match {
+      case Nil => 0
+      case ds_ => foldRight2(ds_, 1) {(a: Int, b: Int) => { a * b } }
+    }
+  }
+
+  def lengthFoldLeft2[A](as: List[A]): Int = {
+    foldLeft2(as, 0) {(a: Int, b: A) => { a + 1 } }
+  }
+
+  def sumFoldLeft2(ints: List[Int]): Int = {
+    foldLeft2(ints, 0) {(a: Int, b: Int) => { a + b } }
+  }
+
+  def productFoldLeft2(ds: List[Int]): Int = {
+    ds match {
+      case Nil => 0
+      case ds_ => foldLeft2(ds_, 1) {(a: Int, b: Int) => { a * b } }
     }
   }
 }
