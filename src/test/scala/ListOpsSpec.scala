@@ -338,5 +338,18 @@ class ListOpsSpec extends FunSpec {
       val result = ListOps.reverse(list)
       assertListCmp(expected, result)
     }
-}
+  }
+
+  describe("Append") {
+    it("Append element to an empty list") {
+      val expected = 1 :: Nil
+      assertListCmp(expected, ListOps.append(List(), 1))
+    }
+
+    it("Append to a non-empty list") {
+      val list = 1 :: 2 :: 3 :: 4 :: Nil
+      val expected = 1 :: 2 :: 3 :: 4 :: 5 :: Nil
+      assertListCmp(expected, ListOps.append(list, 5))
+    }
+  }
 }

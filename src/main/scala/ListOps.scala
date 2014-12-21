@@ -95,11 +95,9 @@ object ListOps {
     }
   }
 
-  def foldRight2[A,B](as: List[A], z: B)(f: (A, B) => B): B =
-  ???
+  def foldRight2[A,B](as: List[A], z: B)(f: (A, B) => B): B = ???
 
-  def foldLeft2[A,B](as: List[A], z: B)(f: (B, A) => B): B =
-  ???
+  def foldLeft2[A,B](as: List[A], z: B)(f: (B, A) => B): B = ???
 
   def lengthFoldRight2[A](as: List[A]): Int = {
     foldRight2(as, 0) {(a: A, b: Int) => { b + 1 }}
@@ -129,5 +127,9 @@ object ListOps {
       case Nil => 0
       case ds_ => foldLeft2(ds_, 1) {(a: Int, b: Int) => { a * b } }
     }
+  }
+
+  def append[A](ls: List[A], l: A): List[A] = {
+    foldRight(ls, l :: Nil)((x: A, agg: List[A]) => agg.+:(x))
   }
 }
