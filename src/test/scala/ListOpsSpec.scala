@@ -131,17 +131,67 @@ class ListOpsSpec extends FunSpec {
     }
   }
 
-  describe("Calculating the length of list, using foldRight") {
-    it ("on empty list it's 0") {
-      assert(0 == ListOps.length(List()))
+  describe("Calculating the length of list") {
+    describe("using foldRight") {
+      it ("on empty list it's 0") {
+        assert(0 == ListOps.lengthFoldRight(List()))
+      }
+
+      it ("on list with 1 element it's just 1") {
+        assert(1 == ListOps.lengthFoldRight(1 :: Nil))
+      }
+
+      it ("on list with n elements, it's n") {
+        assert(4 == ListOps.lengthFoldRight(1 :: 10 :: 100 :: 1000 :: Nil))
+      }
     }
 
-    it ("on list with 1 element it's just 1") {
-      assert(1 == ListOps.length(1 :: Nil))
+    describe("using foldLeft") {
+      it ("on empty list it's 0") {
+        assert(0 == ListOps.lengthFoldLeft(List()))
+      }
+
+      it ("on list with 1 element it's just 1") {
+        assert(1 == ListOps.lengthFoldLeft(1 :: Nil))
+      }
+
+      it ("on list with n elements, it's n") {
+        assert(4 == ListOps.lengthFoldLeft(1 :: 10 :: 100 :: 1000 :: Nil))
+      }
+    }
+  }
+
+  describe("Calculations using foldLeft") {
+    describe("Sum") {
+      it ("Empty list returns 0") {
+        assert(0 == ListOps.sumFoldLeft(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.sumFoldLeft(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual sum") {
+        assert(10 == ListOps.sumFoldLeft(1 :: 3 :: 6 :: Nil))
+      }
     }
 
-    it ("on list with n elements, it's n") {
-      assert(4 == ListOps.length(1 :: 10 :: 100 :: 1000 :: Nil))
+    describe("Product") {
+      it ("Empty lists return 0") {
+        assert(0 == ListOps.productFoldLeft(List()))
+      }
+
+      it ("One value is just this value") {
+        assert(4 == ListOps.productFoldLeft(4 :: Nil))
+      }
+
+      it ("More than one value returns the actual product") {
+        assert(30 == ListOps.productFoldLeft(1 :: 5 :: 6 :: Nil))
+      }
+
+      it ("Zero nullifies the result") {
+        assert(0 == ListOps.productFoldLeft(1 :: 5 :: 0 :: 6 :: Nil))
+      }
     }
   }
 }
