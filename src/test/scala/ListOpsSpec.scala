@@ -352,4 +352,33 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.append(list, 5))
     }
   }
+
+  describe("Concatenate") {
+    it("Empty lists") {
+      assertListCmp(Nil, ListOps.concatenate(List(List(),List(),List())))
+    }
+
+    it("Just 1 list") {
+      val list = 1 :: 2 :: 3 :: Nil
+      assertListCmp(list, ListOps.concatenate(List(list)))
+    }
+
+    it("Just 1 list & empties") {
+      val list = 1 :: 2 :: 3 :: Nil
+      assertListCmp(list, ListOps.concatenate(List(list, Nil, Nil)))
+    }
+
+    it("Just empties & 1 list") {
+      val list = 1 :: 2 :: 3 :: Nil
+      assertListCmp(list, ListOps.concatenate(List(Nil, Nil, list)))
+    }
+
+    it("Just 3 lists") {
+      val list1 = 1 :: 2 :: 3 :: Nil
+      val list2 = 4 :: 5 :: 6 :: 7 :: Nil
+      val list3 = 8 :: 9 :: Nil
+      val expected = 1 :: 2 :: 3 :: 4 :: 5 :: 6 :: 7 :: 8 :: 9 :: Nil
+      assertListCmp(expected, ListOps.concatenate(List(list1, list2, list3)))
+    }
+  }
 }

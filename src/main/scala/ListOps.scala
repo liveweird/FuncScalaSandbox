@@ -132,4 +132,12 @@ object ListOps {
   def append[A](ls: List[A], l: A): List[A] = {
     foldRight(ls, l :: Nil)((x: A, agg: List[A]) => agg.+:(x))
   }
+
+  def concatenate[A](ls: List[List[A]]): List[A] = {
+    foldLeft(ls, List[A]()){
+      (l: List[A], e: List[A]) => {
+        e.:::(l)
+      }
+    }
+  }
 }
