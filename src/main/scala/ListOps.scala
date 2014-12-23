@@ -140,4 +140,12 @@ object ListOps {
       }
     }
   }
+
+  def increment(ls: List[Int]): List[Int] = {
+    foldRight(ls, List[Int]()){
+      (e: Int, l: List[Int]) => {
+        l.::(e + 1)
+      }
+    }
+  }
 }

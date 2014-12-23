@@ -381,4 +381,17 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.concatenate(List(list1, list2, list3)))
     }
   }
+
+  describe("Increment") {
+    it("Does nothing for the empty list") {
+      val expected = Nil
+      assertListCmp(expected, ListOps.increment(expected))
+    }
+
+    it("Increments each item in a non-empty list") {
+      val list = 1 :: 2 :: 3 :: 4 :: Nil
+      val expected = 2 :: 3 :: 4 :: 5 :: Nil
+      assertListCmp(expected, ListOps.increment(list))
+    }
+  }
 }
