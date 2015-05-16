@@ -146,20 +146,6 @@ class ListOpsSpec extends FunSpec {
       }
     }
 
-    describe("using foldRight2") {
-      it ("on empty list it's 0") {
-        assert(0 == ListOps.lengthFoldRight2(List()))
-      }
-
-      it ("on list with 1 element it's just 1") {
-        assert(1 == ListOps.lengthFoldRight2(1 :: Nil))
-      }
-
-      it ("on list with n elements, it's n") {
-        assert(4 == ListOps.lengthFoldRight2(1 :: 10 :: 100 :: 1000 :: Nil))
-      }
-    }
-
     describe("using foldLeft") {
       it ("on empty list it's 0") {
         assert(0 == ListOps.lengthFoldLeft(List()))
@@ -171,20 +157,6 @@ class ListOpsSpec extends FunSpec {
 
       it ("on list with n elements, it's n") {
         assert(4 == ListOps.lengthFoldLeft(1 :: 10 :: 100 :: 1000 :: Nil))
-      }
-    }
-
-    describe("using foldLeft2") {
-      it ("on empty list it's 0") {
-        assert(0 == ListOps.lengthFoldLeft2(List()))
-      }
-
-      it ("on list with 1 element it's just 1") {
-        assert(1 == ListOps.lengthFoldLeft2(1 :: Nil))
-      }
-
-      it ("on list with n elements, it's n") {
-        assert(4 == ListOps.lengthFoldLeft2(1 :: 10 :: 100 :: 1000 :: Nil))
       }
     }
   }
@@ -204,20 +176,6 @@ class ListOpsSpec extends FunSpec {
       }
     }
 
-    describe("using foldLeft2") {
-      it ("Empty list returns 0") {
-        assert(0 == ListOps.sumFoldLeft2(List()))
-      }
-
-      it ("One value is just this value") {
-        assert(4 == ListOps.sumFoldLeft2(4 :: Nil))
-      }
-
-      it ("More than one value returns the actual sum") {
-        assert(10 == ListOps.sumFoldLeft2(1 :: 3 :: 6 :: Nil))
-      }
-    }
-
     describe("using foldRight") {
       it ("Empty list returns 0") {
         assert(0 == ListOps.sumFoldRight(List()))
@@ -229,20 +187,6 @@ class ListOpsSpec extends FunSpec {
 
       it ("More than one value returns the actual sum") {
         assert(10 == ListOps.sumFoldRight(1 :: 3 :: 6 :: Nil))
-      }
-    }
-
-    describe("using foldRight2") {
-      it ("Empty list returns 0") {
-        assert(0 == ListOps.sumFoldRight2(List()))
-      }
-
-      it ("One value is just this value") {
-        assert(4 == ListOps.sumFoldRight2(4 :: Nil))
-      }
-
-      it ("More than one value returns the actual sum") {
-        assert(10 == ListOps.sumFoldRight2(1 :: 3 :: 6 :: Nil))
       }
     }
   }
@@ -266,24 +210,6 @@ class ListOpsSpec extends FunSpec {
       }
     }
 
-    describe("using foldLeft2") {
-      it ("Empty lists return 0") {
-        assert(0 == ListOps.productFoldLeft2(List()))
-      }
-
-      it ("One value is just this value") {
-        assert(4 == ListOps.productFoldLeft2(4 :: Nil))
-      }
-
-      it ("More than one value returns the actual product") {
-        assert(30 == ListOps.productFoldLeft2(1 :: 5 :: 6 :: Nil))
-      }
-
-      it ("Zero nullifies the result") {
-        assert(0 == ListOps.productFoldLeft2(1 :: 5 :: 0 :: 6 :: Nil))
-      }
-    }
-
     describe("using foldRight") {
       it ("Empty lists return 0") {
         assert(0 == ListOps.productFoldRight(List()))
@@ -299,24 +225,6 @@ class ListOpsSpec extends FunSpec {
 
       it ("Zero nullifies the result") {
         assert(0 == ListOps.productFoldRight(1 :: 5 :: 0 :: 6 :: Nil))
-      }
-    }
-
-    describe("using foldRight2") {
-      it ("Empty lists return 0") {
-        assert(0 == ListOps.productFoldRight2(List()))
-      }
-
-      it ("One value is just this value") {
-        assert(4 == ListOps.productFoldRight2(4 :: Nil))
-      }
-
-      it ("More than one value returns the actual product") {
-        assert(30 == ListOps.productFoldRight2(1 :: 5 :: 6 :: Nil))
-      }
-
-      it ("Zero nullifies the result") {
-        assert(0 == ListOps.productFoldRight2(1 :: 5 :: 0 :: 6 :: Nil))
       }
     }
   }
