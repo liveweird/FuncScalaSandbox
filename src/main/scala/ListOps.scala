@@ -121,4 +121,11 @@ object ListOps {
       case x :: xs => x.toString() :: stringize(xs)
     }
   }
+
+  def map[A,B](as: List[A])(f: A => B): List[B] = {
+    as match {
+      case Nil => Nil
+      case x :: xs => f(x) :: ListOps.map(xs)(f)
+    }
+  }
 }

@@ -315,4 +315,19 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.stringize(list))
     }
   }
+
+  describe("Map") {
+    it("Does nothing for the empty list") {
+      val expected = List[Int]()
+      def functor = (x: Int) => x + 1
+      assertListCmp(expected, ListOps.map(expected)(functor))
+    }
+
+    it("Properly maps all the items in the list") {
+      val list = 1 :: 3 :: 5 :: -2 :: Nil
+      val expected = 2 :: 4 :: 6 :: -1 :: Nil
+      def functor = (x: Int) => x + 1
+      assertListCmp(expected, ListOps.map(list)(functor))
+    }
+  }
 }
