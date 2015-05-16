@@ -302,4 +302,17 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.increment(list))
     }
   }
+
+  describe("Stringize") {
+    it("Does nothing for the empty list") {
+      val expected = Nil
+      assertListCmp(expected, ListOps.stringize(expected))
+    }
+
+    it("Stringizes doubles in order") {
+      val list = 1.043 :: 22.0E44 :: -33.12 :: Nil
+      val expected = (1.043).toString() :: (22.0E44).toString() :: (-33.12).toString() :: Nil
+      assertListCmp(expected, ListOps.stringize(list))
+    }
+  }
 }

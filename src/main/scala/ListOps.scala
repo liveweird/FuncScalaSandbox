@@ -114,4 +114,11 @@ object ListOps {
       }
     }
   }
+
+  def stringize(ls: List[Double]): List[String] = {
+    ls match {
+      case Nil => Nil
+      case x :: xs => x.toString() :: stringize(xs)
+    }
+  }
 }
