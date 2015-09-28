@@ -136,4 +136,11 @@ object ListOps {
       case x :: xs => ListOps.filter(xs)(f)
     }
   }
+
+  def flatMap[A,B](as: List[A])(f: A => List[B]): List[B] = {
+    as match {
+      case Nil => Nil
+      case x :: xs => f(x) ::: ListOps.flatMap(xs)(f)
+    }
+  }
 }

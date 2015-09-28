@@ -353,4 +353,27 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.filter(list)(functor))
     }
   }
+
+  // 3.20
+  describe("FlatNap") {
+    it("Does nothing when applied on empty list") {
+      val expected = List[Int]()
+      def functor = (x: Int) => List(x, x)
+      assertListCmp(expected, ListOps.flatMap(expected)(functor))
+    }
+
+    it("Merges list when proper mapping is provided") {
+      val list = 1 :: 3 :: 5 :: -2 :: Nil
+      val expected = 1 :: 1 :: 3 :: 3 :: 5 :: 5 :: -2 :: -2 :: Nil
+      def functor = (x: Int) => List(x, x)
+      assertListCmp(expected, ListOps.flatMap(list)(functor))
+    }
+
+    it("Retrieves an empty list when mapping empties lists") {
+      val list = 1 :: 3 :: 5 :: -2 :: Nil
+      val expected = List[Int]()
+      def functor = (x: Int) => List[Int]()
+      assertListCmp(expected, ListOps.flatMap(list)(functor))
+    }
+  }
 }
