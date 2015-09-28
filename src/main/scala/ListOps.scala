@@ -143,4 +143,8 @@ object ListOps {
       case x :: xs => f(x) ::: ListOps.flatMap(xs)(f)
     }
   }
+
+  def filter2[A](as: List[A])(f: A => Boolean): List[A] = {
+    ListOps.flatMap[A,A](as)(x => if (f(x)) x :: Nil else List[A]())
+  }
 }

@@ -355,7 +355,7 @@ class ListOpsSpec extends FunSpec {
   }
 
   // 3.20
-  describe("FlatNap") {
+  describe("FlatMap") {
     it("Does nothing when applied on empty list") {
       val expected = List[Int]()
       def functor = (x: Int) => List(x, x)
@@ -374,6 +374,29 @@ class ListOpsSpec extends FunSpec {
       val expected = List[Int]()
       def functor = (x: Int) => List[Int]()
       assertListCmp(expected, ListOps.flatMap(list)(functor))
+    }
+  }
+
+  // 3.21
+  describe("Filter2") {
+    it("Does nothing for the empty list") {
+      val expected = List[Int]()
+      def functor = (x: Int) => x > 1
+      assertListCmp(expected, ListOps.filter2(expected)(functor))
+    }
+
+    it("Does remove stuff that doesn't meet condition") {
+      val list = 1 :: 3 :: 5 :: -2 :: Nil
+      val expected = 3 :: 5 :: Nil
+      def functor = (x: Int) => x > 1
+      assertListCmp(expected, ListOps.filter2(list)(functor))
+    }
+
+    it("Does remove stuff that doesn't meet condition & appears few times") {
+      val list = 1 :: 3 :: 1 :: 5 :: -2 :: Nil
+      val expected = 3 :: 5 :: Nil
+      def functor = (x: Int) => x > 1
+      assertListCmp(expected, ListOps.filter2(list)(functor))
     }
   }
 }
