@@ -128,4 +128,12 @@ object ListOps {
       case x :: xs => f(x) :: ListOps.map(xs)(f)
     }
   }
+
+  def filter[A](as: List[A])(f: A => Boolean): List[A] = {
+    as match {
+      case Nil => Nil
+      case x :: xs if f(x) => x :: ListOps.filter(xs)(f)
+      case x :: xs => ListOps.filter(xs)(f)
+    }
+  }
 }

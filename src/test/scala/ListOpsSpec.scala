@@ -330,4 +330,27 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.map(list)(functor))
     }
   }
+
+  // 3.19
+  describe("Filter") {
+    it("Does nothing for the empty list") {
+      val expected = List[Int]()
+      def functor = (x: Int) => x > 1
+      assertListCmp(expected, ListOps.filter(expected)(functor))
+    }
+
+    it("Does remove stuff that doesn't meet condition") {
+      val list = 1 :: 3 :: 5 :: -2 :: Nil
+      val expected = 3 :: 5 :: Nil
+      def functor = (x: Int) => x > 1
+      assertListCmp(expected, ListOps.filter(list)(functor))
+    }
+
+    it("Does remove stuff that doesn't meet condition & appears few times") {
+      val list = 1 :: 3 :: 1 :: 5 :: -2 :: Nil
+      val expected = 3 :: 5 :: Nil
+      def functor = (x: Int) => x > 1
+      assertListCmp(expected, ListOps.filter(list)(functor))
+    }
+  }
 }
