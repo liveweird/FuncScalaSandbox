@@ -147,4 +147,17 @@ object ListOps {
   def filter2[A](as: List[A])(f: A => Boolean): List[A] = {
     ListOps.flatMap[A,A](as)(x => if (f(x)) x :: Nil else List[A]())
   }
+
+  def zipWithInt(l1: List[Int], l2: List[Int]): List[Int] = {
+    l1 match {
+      case Nil => l2 match {
+        case Nil => Nil
+        case _ => l2
+      }
+      case l1a :: l1b => l2 match {
+        case Nil => l1
+        case l2a :: l2b => (l1a + l2a) :: ListOps.zipWithInt(l1b, l2b)
+      }
+    }
+  }
 }
