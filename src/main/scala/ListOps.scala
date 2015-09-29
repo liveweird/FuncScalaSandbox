@@ -160,4 +160,17 @@ object ListOps {
       }
     }
   }
+
+  def zipWith[A](l1: List[A], l2: List[A])(f: (A, A) => A): List[A] = {
+    l1 match {
+      case Nil => l2 match {
+        case Nil => Nil
+        case _ => l2
+      }
+      case l1a :: l1b => l2 match {
+        case Nil => l1
+        case l2a :: l2b => f(l1a, l2a) :: ListOps.zipWith(l1b, l2b)(f)
+      }
+    }
+  }
 }

@@ -435,4 +435,40 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.zipWithInt(l1, l2))
     }
   }
+
+  // 3.23
+  describe("ZipWith") {
+    it("First list empty") {
+      val l1 = List[Int]()
+      val l2 = 1 :: 2 :: Nil
+      assertListCmp(l2, ListOps.zipWith(l1, l2)((x, y) => x + y))
+    }
+
+    it("Second list empty") {
+      val l1 = List[Int]()
+      val l2 = 1 :: 2 :: Nil
+      assertListCmp(l2, ListOps.zipWith(l2, l1)((x, y) => x + y))
+    }
+
+    it("Left list shorter") {
+      val l1 = 8 :: 7 ::Nil
+      val l2 = 1 :: 2 :: 4 :: 6 :: Nil
+      val expected = 9 :: 9 :: 4 :: 6 :: Nil
+      assertListCmp(expected, ListOps.zipWith(l1, l2)((x, y) => x + y))
+    }
+
+    it("Right list shorter") {
+      val l1 = 8 :: 7 ::Nil
+      val l2 = 1 :: 2 :: 4 :: 6 :: Nil
+      val expected = 9 :: 9 :: 4 :: 6 :: Nil
+      assertListCmp(expected, ListOps.zipWith(l2, l1)((x, y) => x + y))
+    }
+
+    it("Equal lists") {
+      val l1 = 8 :: 7 :: 0 :: 2 :: Nil
+      val l2 = 1 :: 2 :: 4 :: 6 :: Nil
+      val expected = 9 :: 9 :: 4 :: 8 :: Nil
+      assertListCmp(expected, ListOps.zipWith(l1, l2)((x, y) => x + y))
+    }
+  }
 }
