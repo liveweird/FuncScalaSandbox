@@ -471,4 +471,46 @@ class ListOpsSpec extends FunSpec {
       assertListCmp(expected, ListOps.zipWith(l1, l2)((x, y) => x + y))
     }
   }
+
+  // 3.24
+  describe("Has subsequence?") {
+    it("Empty seq has empty subseq") {
+      assert(false == ListOps.hasSubsequence(List[Int](), List[Int]()))
+    }
+
+    it("Any other seq has empty subseq") {
+      assert(false == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, List[Int]()))
+    }
+
+    it("Seq has 1-elem subseq") {
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 1 :: Nil))
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 2 :: Nil))
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 3 :: Nil))
+    }
+
+    it("Seq has 2-elem subseq") {
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 1 :: 2 :: Nil))
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 2 :: 3 :: Nil))
+    }
+
+    it("Seq has 2-elem subseq, elem happens earlier as well") {
+      assert(true == ListOps.hasSubsequence(2 :: 2 :: 3 :: Nil, 2 :: 3 :: Nil))
+    }
+
+    it("If chars are OK, but there's something in between, it's not a subseq") {
+      assert(false == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 1 :: 3 :: Nil))
+    }
+
+    it("If chars are OK, but the order is wrong, it's not a subseq") {
+      assert(false == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 2 :: 1 :: Nil))
+    }
+
+    it("If seq is equal subseq, that's ok") {
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 1 :: 2 :: 3 :: Nil))
+    }
+
+    it("If subseq is wider than seq, it's not ok") {
+      assert(false == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 1 :: 2 :: 3 :: 4 :: Nil))
+    }
+  }
 }

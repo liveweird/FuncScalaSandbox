@@ -173,4 +173,26 @@ object ListOps {
       }
     }
   }
+
+  def hasSubsequence[A](full: List[A], subseq: List[A]): Boolean = {
+    if (ListOps.compareLists(full, subseq)) {
+      return true
+    }
+
+    full match {
+      case head :: tail => ListOps.hasSubsequence(tail, subseq)
+      case _ => false
+    }
+  }
+
+  private def compareLists[A](full: List[A], subseq: List[A]): Boolean = {
+    full match {
+      case head1 :: tail1 => subseq match {
+        case `head1` :: tail2 => ListOps.compareLists(tail1, tail2)
+        case head2 :: tail2 => false
+        case _ => true
+      }
+      case _ => true
+    }
+  }
 }
