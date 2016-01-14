@@ -475,11 +475,11 @@ class ListOpsSpec extends FunSpec {
   // 3.24
   describe("Has subsequence?") {
     it("Empty seq has empty subseq") {
-      assert(false == ListOps.hasSubsequence(List[Int](), List[Int]()))
+      assert(true == ListOps.hasSubsequence(List[Int](), List[Int]()))
     }
 
     it("Any other seq has empty subseq") {
-      assert(false == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, List[Int]()))
+      assert(true == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, List[Int]()))
     }
 
     it("Seq has 1-elem subseq") {

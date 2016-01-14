@@ -181,7 +181,7 @@ object ListOps {
 
     full match {
       case head :: tail => ListOps.hasSubsequence(tail, subseq)
-      case _ => false
+      case Nil => false
     }
   }
 
@@ -190,9 +190,12 @@ object ListOps {
       case head1 :: tail1 => subseq match {
         case `head1` :: tail2 => ListOps.compareLists(tail1, tail2)
         case head2 :: tail2 => false
-        case _ => true
+        case Nil => true
       }
-      case _ => true
+      case Nil => subseq match {
+        case Nil => true
+        case _ => false
+      }
     }
   }
 }
