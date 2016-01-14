@@ -1,5 +1,6 @@
 package net.gebski.FuncScalaSandbox.Chapter3
 
+import net.gebski.FuncScalaSandbox.Chapter3.ListOps.{Branch, Leaf}
 import org.scalatest.FunSpec
 
 class ListOpsSpec extends FunSpec {
@@ -511,6 +512,33 @@ class ListOpsSpec extends FunSpec {
 
     it("If subseq is wider than seq, it's not ok") {
       assert(false == ListOps.hasSubsequence(1 :: 2 :: 3 :: Nil, 1 :: 2 :: 3 :: 4 :: Nil))
+    }
+  }
+
+  // 3.25
+  describe("Tree operations - size") {
+    it("Single leaf") {
+      assert(1 == ListOps.size(Leaf(1)))
+    }
+
+    it("One level") {
+      assert(3 == ListOps.size(Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Two levels - left empty") {
+      assert(5 == ListOps.size(Branch(Leaf(1), Branch(Leaf(2), Leaf(3)))))
+    }
+
+    it("Two levels - right empty") {
+      assert(5 == ListOps.size(Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))))
+    }
+
+    it("Two levels - all filled") {
+      assert(7 == ListOps.size(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))))
+    }
+
+    it("Three levels") {
+      assert(15 == ListOps.size(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(5), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
     }
   }
 }
