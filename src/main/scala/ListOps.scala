@@ -227,4 +227,6 @@ object ListOps {
       case Branch(a, b) => 1 + depth(a).max(depth(b))
     }
   }
+
+  def map[A](tree: Tree[A])(f: A => A): Tree[A] = ???
 }

@@ -1,6 +1,6 @@
 package net.gebski.FuncScalaSandbox.Chapter3
 
-import net.gebski.FuncScalaSandbox.Chapter3.ListOps.{Branch, Leaf}
+import net.gebski.FuncScalaSandbox.Chapter3.ListOps.{Tree, Branch, Leaf}
 import org.scalatest.FunSpec
 
 class ListOpsSpec extends FunSpec {
@@ -601,6 +601,65 @@ class ListOpsSpec extends FunSpec {
 
     it("Three levels") {
       assert(4 == ListOps.depth(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(9), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
+    }
+  }
+
+  // 3.28
+  private def treeCmp[A](t1: Tree[A], t2: Tree[A]): Boolean = {
+    t1 match {
+      case Leaf(a) => t2 match {
+        case Leaf(`a`) => true
+        case Leaf(_) => false
+        case Branch(_, _) => false
+      }
+      case Branch(a, b) => t2 match {
+        case Leaf(_) => false
+        case Branch(c, d) => treeCmp(a, c) && treeCmp(b, d)
+      }
+    }
+  }
+
+  describe("Tree operations - map") {
+    it("Compare identical leaves") {
+      assert(true == treeCmp(Leaf(4), Leaf(4)))
+    }
+
+    it("Compare different leaves") {
+      assert(false == treeCmp(Leaf(4), Leaf(3)))
+    }
+
+    it("Compare identical branches") {
+      assert(true == treeCmp(Branch(Leaf(1), Leaf(2)), Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Compare different branches") {
+      assert(false == treeCmp(Branch(Leaf(1), Leaf(2)), Branch(Leaf(2), Leaf(1))))
+    }
+
+    it("Compare different branches - diff composure") {
+      val one = Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))
+      val two = Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))
+
+      assert(false == treeCmp(one, two))
+    }
+
+    it("Compare identical branches - irregular") {
+      val one = Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))
+      val two = Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))
+      assert(true == treeCmp(one, two))
+    }
+
+    it("Compare different branches - irregular") {
+      val one = Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))
+      val two = Branch(Branch(Leaf(1), Leaf(4)), Leaf(3))
+      assert(false == treeCmp(one, two))
+    }
+
+    it("Multiply by 2") {
+      val input = Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))
+      val expected = Branch(Branch(Leaf(2), Leaf(4)), Leaf(20))
+      def func = (x: Int) => 2 * x
+      assert(true == treeCmp(ListOps.map(input)(func), expected))
     }
   }
 }
