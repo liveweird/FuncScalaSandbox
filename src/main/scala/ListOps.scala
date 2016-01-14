@@ -220,4 +220,11 @@ object ListOps {
       case Branch(a: Tree[Int], b: Tree[Int]) => maximum_with_ctx(a, ctx).max(maximum_with_ctx(b, ctx))
     }
   }
+
+  def depth[A](tree: Tree[A]): Int = {
+    tree match {
+      case Leaf(_) => 1
+      case Branch(a, b) => 1 + depth(a).max(depth(b))
+    }
+  }
 }

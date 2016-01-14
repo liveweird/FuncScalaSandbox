@@ -576,4 +576,31 @@ class ListOpsSpec extends FunSpec {
       assert(9 == ListOps.maximum(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(9), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
     }
   }
+
+  // 3.27
+  describe("Tree operations - depth") {
+    it("Single leaf") {
+      assert(1 == ListOps.depth(Leaf(10)))
+    }
+
+    it("One level") {
+      assert(2 == ListOps.depth(Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Two levels - left empty") {
+      assert(3 == ListOps.depth(Branch(Leaf(10), Branch(Leaf(2), Leaf(3)))))
+    }
+
+    it("Two levels - right empty") {
+      assert(3 == ListOps.depth(Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))))
+    }
+
+    it("Two levels - all filled") {
+      assert(3 == ListOps.depth(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))))
+    }
+
+    it("Three levels") {
+      assert(4 == ListOps.depth(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(9), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
+    }
+  }
 }
