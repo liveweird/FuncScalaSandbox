@@ -541,4 +541,39 @@ class ListOpsSpec extends FunSpec {
       assert(15 == ListOps.size(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(5), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
     }
   }
+
+  // 3.26
+  describe("Tree operations - maximum") {
+    it("Single leaf") {
+      assert(10 == ListOps.maximum(Leaf(10)))
+    }
+
+    it("One level") {
+      assert(2 == ListOps.maximum(Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Two levels - left empty, max in top") {
+      assert(10 == ListOps.maximum(Branch(Leaf(10), Branch(Leaf(2), Leaf(3)))))
+    }
+
+    it("Two levels - left empty, max in bottom") {
+      assert(20 == ListOps.maximum(Branch(Leaf(10), Branch(Leaf(2), Leaf(20)))))
+    }
+
+    it("Two levels - right empty, max in top") {
+      assert(10 == ListOps.maximum(Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))))
+    }
+
+    it("Two levels - right empty, max in bottom") {
+      assert(20 == ListOps.maximum(Branch(Branch(Leaf(20), Leaf(2)), Leaf(10))))
+    }
+
+    it("Two levels - all filled") {
+      assert(4 == ListOps.maximum(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))))
+    }
+
+    it("Three levels") {
+      assert(9 == ListOps.maximum(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(9), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
+    }
+  }
 }

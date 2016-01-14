@@ -209,4 +209,15 @@ object ListOps {
       case Branch(a, b) => 1 + size(a) + size(b)
     }
   }
+
+  def maximum(tree: Tree[Int]): Int = {
+    maximum_with_ctx(tree, Int.MinValue)
+  }
+
+  private def maximum_with_ctx(tree: Tree[Int], ctx: Int): Int = {
+    tree match {
+      case Leaf(a) => ctx.max(a)
+      case Branch(a: Tree[Int], b: Tree[Int]) => maximum_with_ctx(a, ctx).max(maximum_with_ctx(b, ctx))
+    }
+  }
 }
