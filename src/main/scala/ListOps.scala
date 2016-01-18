@@ -234,4 +234,21 @@ object ListOps {
       case Branch(b, c) => Branch(ListOps.map(b)(f), ListOps.map(c)(f))
     }
   }
+
+  def size2[A](tree: Tree[A]): Int = {
+    fold(tree)((a: A) => 1)((a: Int, b: Int) => 1 + a + b)
+  }
+
+  def maximum2(tree: Tree[Int]): Int = ???
+
+  def depth2[A](tree: Tree[A]): Int = ???
+
+  def map2[A](tree: Tree[A])(f: A => A): Tree[A] = ???
+
+  def fold[A,B](tree: Tree[A])(f: A => B)(g: (B, B) => B): B = {
+    tree match {
+      case Leaf(a) => f(a)
+      case Branch(b, c) => g(fold(b)(f)(g),fold(c)(f)(g))
+    }
+  }
 }

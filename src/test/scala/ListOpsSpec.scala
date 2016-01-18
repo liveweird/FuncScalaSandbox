@@ -669,4 +669,107 @@ class ListOpsSpec extends FunSpec {
       assert(true == treeCmp(ListOps.map(input)(func), expected))
     }
   }
+
+  // 3.29
+  describe("2: Tree operations - size") {
+    it("Single leaf") {
+      assert(1 == ListOps.size2(Leaf(1)))
+    }
+
+    it("One level") {
+      assert(3 == ListOps.size2(Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Two levels - left empty") {
+      assert(5 == ListOps.size2(Branch(Leaf(1), Branch(Leaf(2), Leaf(3)))))
+    }
+
+    it("Two levels - right empty") {
+      assert(5 == ListOps.size2(Branch(Branch(Leaf(1), Leaf(2)), Leaf(3))))
+    }
+
+    it("Two levels - all filled") {
+      assert(7 == ListOps.size2(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))))
+    }
+
+    it("Three levels") {
+      assert(15 == ListOps.size2(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(5), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
+    }
+  }
+
+  describe("2: Tree operations - maximum") {
+    it("Single leaf") {
+      assert(10 == ListOps.maximum2(Leaf(10)))
+    }
+
+    it("One level") {
+      assert(2 == ListOps.maximum2(Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Two levels - left empty, max in top") {
+      assert(10 == ListOps.maximum2(Branch(Leaf(10), Branch(Leaf(2), Leaf(3)))))
+    }
+
+    it("Two levels - left empty, max in bottom") {
+      assert(20 == ListOps.maximum2(Branch(Leaf(10), Branch(Leaf(2), Leaf(20)))))
+    }
+
+    it("Two levels - right empty, max in top") {
+      assert(10 == ListOps.maximum2(Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))))
+    }
+
+    it("Two levels - right empty, max in bottom") {
+      assert(20 == ListOps.maximum2(Branch(Branch(Leaf(20), Leaf(2)), Leaf(10))))
+    }
+
+    it("Two levels - all filled") {
+      assert(4 == ListOps.maximum2(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))))
+    }
+
+    it("Three levels") {
+      assert(9 == ListOps.maximum2(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(9), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
+    }
+  }
+
+  describe("2: Tree operations - depth") {
+    it("Single leaf") {
+      assert(1 == ListOps.depth2(Leaf(10)))
+    }
+
+    it("One level") {
+      assert(2 == ListOps.depth2(Branch(Leaf(1), Leaf(2))))
+    }
+
+    it("Two levels - left empty") {
+      assert(3 == ListOps.depth2(Branch(Leaf(10), Branch(Leaf(2), Leaf(3)))))
+    }
+
+    it("Two levels - right empty") {
+      assert(3 == ListOps.depth2(Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))))
+    }
+
+    it("Two levels - all filled") {
+      assert(3 == ListOps.depth2(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4)))))
+    }
+
+    it("Three levels") {
+      assert(4 == ListOps.depth2(Branch(Branch(Branch(Leaf(1), Leaf(2)), Branch(Leaf(3), Leaf(4))), Branch(Branch(Leaf(9), Leaf(6)), Branch(Leaf(7), Leaf(8))))))
+    }
+  }
+
+  describe("2: Tree operations - map") {
+    it("Multiply by 2") {
+      val input = Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))
+      val expected = Branch(Branch(Leaf(2), Leaf(4)), Leaf(20))
+      def func = (x: Int) => 2 * x
+      assert(true == treeCmp(ListOps.map2(input)(func), expected))
+    }
+
+    it("Subtract 3") {
+      val input = Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))
+      val expected = Branch(Branch(Leaf(-2), Leaf(-1)), Leaf(7))
+      def func = (x: Int) => x - 3
+      assert(true == treeCmp(ListOps.map2(input)(func), expected))
+    }
+  }
 }
