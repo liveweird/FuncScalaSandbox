@@ -661,5 +661,12 @@ class ListOpsSpec extends FunSpec {
       def func = (x: Int) => 2 * x
       assert(true == treeCmp(ListOps.map(input)(func), expected))
     }
+
+    it("Subtract 3") {
+      val input = Branch(Branch(Leaf(1), Leaf(2)), Leaf(10))
+      val expected = Branch(Branch(Leaf(-2), Leaf(-1)), Leaf(7))
+      def func = (x: Int) => x - 3
+      assert(true == treeCmp(ListOps.map(input)(func), expected))
+    }
   }
 }

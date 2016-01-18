@@ -228,5 +228,10 @@ object ListOps {
     }
   }
 
-  def map[A](tree: Tree[A])(f: A => A): Tree[A] = ???
+  def map[A](tree: Tree[A])(f: A => A): Tree[A] = {
+    tree match {
+      case Leaf(a) => Leaf(f(a))
+      case Branch(b, c) => Branch(ListOps.map(b)(f), ListOps.map(c)(f))
+    }
+  }
 }
