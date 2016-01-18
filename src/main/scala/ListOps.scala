@@ -239,11 +239,18 @@ object ListOps {
     fold(tree)((a: A) => 1)((a: Int, b: Int) => 1 + a + b)
   }
 
-  def maximum2(tree: Tree[Int]): Int = ???
+  def maximum2(tree: Tree[Int]): Int = {
+    fold(tree)((a: Int) => a)((a: Int, b: Int) => a.max(b))
+  }
 
-  def depth2[A](tree: Tree[A]): Int = ???
+  def depth2[A](tree: Tree[A]): Int = {
+    fold(tree)((a: A) => 1)((a: Int, b: Int) => 1 + a.max(b))
+  }
 
-  def map2[A](tree: Tree[A])(f: A => A): Tree[A] = ???
+  def map2[A](tree: Tree[A])(f: A => A): Tree[A] = {
+    val mapper: A => Tree[A] = (a: A) => Leaf(f(a))
+    fold(tree)(mapper)((b: Tree[A], c: Tree[A]) => Branch(b, c))
+  }
 
   def fold[A,B](tree: Tree[A])(f: A => B)(g: (B, B) => B): B = {
     tree match {
