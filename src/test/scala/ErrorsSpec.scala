@@ -77,4 +77,22 @@ class ErrorsSpec extends FunSpec {
       assert(None == option.flatMap((a: Int) => Some(a)))
     }
   }
+
+  describe ("Option - variance") {
+    it("For empty sequence") {
+      assert(None == Option.variance(List[Double] ()))
+    }
+
+    it("For a single element in the sequence") {
+      assert(Some(0) == Option.variance(List[Double] (1)))
+    }
+
+    it("For two elements in the sequence") {
+      assert(Some(1) == Option.variance(List[Double] (1,3)))
+    }
+
+    it("For three elements in the sequence") {
+      assert(Some(2.0/3) == Option.variance(List[Double] (1,2,3)))
+    }
+  }
 }

@@ -41,3 +41,19 @@ sealed trait Option[+A] {
 
 case class Some[+A](get: A) extends Option[A]
 case object None extends Option[Nothing]
+
+object Option {
+
+  def mean(xs: Seq[Double]): Option[Double] = {
+    if (xs.isEmpty) {
+      return None
+    }
+    val sum = xs.foldLeft[Double](0)((cnt, elem) => { cnt + elem})
+    return Some(sum / xs.length)
+  }
+
+  def variance(xs: Seq[Double]): Option[Double] = {
+    val mean = Option.mean(xs)
+    return mean flatMap(m => Option.mean(xs.map(x => math.pow(x - m, 2))))
+  }
+}
