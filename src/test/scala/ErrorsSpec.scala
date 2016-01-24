@@ -43,4 +43,38 @@ class ErrorsSpec extends FunSpec {
       assert(None == option.flatMap((a: Int) => Some(a)))
     }
   }
+
+  describe("Options - orElsing") {
+    it("Works for some") {
+      val option = Some(1)
+      assert (Some(1) == option.orElse(Some(2)))
+    }
+
+    it("Works for none") {
+      val option = None
+      assert (Some(2) == option.orElse(Some(2)))
+    }
+
+    it("Works for none & none") {
+      val option = None
+      assert (None == option.orElse(None))
+    }
+  }
+
+  describe("Options - filtering") {
+    it("Works for some, met") {
+      val option = Some(1)
+      assert(Some(1) == option.filter((a: Int) => a > 0))
+    }
+
+    it("Works for some, not met") {
+      val option = Some(1)
+      assert(None == option.filter((a: Int) => a < 0))
+    }
+
+    it("Works for none") {
+      val option = None
+      assert(None == option.flatMap((a: Int) => Some(a)))
+    }
+  }
 }
