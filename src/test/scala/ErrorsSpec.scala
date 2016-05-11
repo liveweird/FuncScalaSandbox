@@ -78,7 +78,7 @@ class ErrorsSpec extends FunSpec {
     }
   }
 
-  describe ("Option - variance") {
+  describe ("Options - variance") {
     it("For empty sequence") {
       assert(None == Option.variance(List[Double] ()))
     }
@@ -93,6 +93,24 @@ class ErrorsSpec extends FunSpec {
 
     it("For three elements in the sequence") {
       assert(Some(2.0/3) == Option.variance(List[Double] (1,2,3)))
+    }
+  }
+
+  describe("Options - map2") {
+    it("First value empty") {
+      assert(None == Option.map2(None, Some(1))((a: Int, b: Int) => a + b))
+    }
+
+    it("Second value empty") {
+      assert(None == Option.map2(Some(2), None)((a: Int, b: Int) => a + b))
+    }
+
+    it("Both values empty") {
+      assert(None == Option.map2(None, None)((a: Int, b: Int) => a + b))
+    }
+
+    it("None of the values empty") {
+      assert(Some(3) == Option.map2(Some(1), Some(2))((a: Int, b: Int) => a + b))
     }
   }
 }

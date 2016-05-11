@@ -56,4 +56,15 @@ object Option {
     val mean = Option.mean(xs)
     return mean flatMap(m => Option.mean(xs.map(x => math.pow(x - m, 2))))
   }
+
+  def map2[A,B,C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = {
+    a match {
+      case a2: Some[A] =>
+        b match {
+          case b2: Some[B] => Some(f(a2.get, b2.get))
+          case _ => None
+        }
+      case _ => None
+    }
+  }
 }
