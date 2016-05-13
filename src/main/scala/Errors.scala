@@ -48,7 +48,7 @@ object Option {
     if (xs.isEmpty) {
       return None
     }
-    val sum = xs.foldLeft[Double](0)((cnt, elem) => { cnt + elem})
+    val sum = xs.foldLeft[Double](0)((cnt, elem) => { cnt + elem })
     return Some(sum / xs.length)
   }
 
@@ -66,5 +66,17 @@ object Option {
         }
       case _ => None
     }
+  }
+
+  private def seqInternal[A](a: List[Option[A]], ctx: List[A]): Option[List[A]] = {
+    a match {
+      case Some(h) :: tail => seqInternal(tail, ctx ::: List[A](h))
+      case None :: tail => None
+      case _ => Some(ctx)
+    }
+  }
+
+  def sequence[A](a: List[Option[A]]): Option[List[A]] = {
+    seqInternal(a, List[A]())
   }
 }

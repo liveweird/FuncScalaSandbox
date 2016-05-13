@@ -7,6 +7,27 @@ import scala.{Option => _, Some => _, Either => _, _}
 
 class ErrorsSpec extends FunSpec {
 
+  def assertListCmp[A](l1: List[A], l2: List[A]) = {
+    assert(l1.length == l2.length)
+    assert(0 == l1.zip(l2).count { case (x, y) => x != y} )
+  }
+
+  def assertListOptionCmp[A](l1: Option[List[A]], l2: Option[List[A]]) = {
+    l1 match {
+      case _l1: Some[List[A]] =>
+        l2 match {
+          case _l2: Some[List[A]] =>
+            assertListCmp(_l1.get, _l2.get)
+          case _ => assert(false)
+        }
+      case _ =>
+        l2 match {
+          case None => ;
+          case _ => assert(false)
+        }
+    }
+  }
+
   // 4.1
   describe("Options - mapping") {
     it("Works for some") {
@@ -111,6 +132,38 @@ class ErrorsSpec extends FunSpec {
 
     it("None of the values empty") {
       assert(Some(3) == Option.map2(Some(1), Some(2))((a: Int, b: Int) => a + b))
+    }
+  }
+
+  describe("Options - sequence") {
+    it("Empty list") {
+      val empty = List[Int]()
+      val emptyOpts = List[Option[Int]]()
+      assertListOptionCmp(Some(empty), Option.sequence(emptyOpts))
+    }
+
+    it("Single None") {
+      assertListOptionCmp(None, Option.sequence(List[Option[Int]](None)))
+    }
+
+    it("Single Some") {
+      assertListOptionCmp(Some(List[Int](3)), Option.sequence(List[Option[Int]](Some(3))))
+    }
+
+    it("Only Somes") {
+      assertListOptionCmp(Some(List[Int](3, 5, 7)), Option.sequence(List[Option[Int]](Some(3), Some(5), Some(7))))
+    }
+
+    it("Somes with a single None") {
+      assertListOptionCmp(None, Option.sequence(List[Option[Int]](Some(3), None, Some(7))))
+    }
+
+    it("Somes with some Nones") {
+      assertListOptionCmp(None, Option.sequence(List[Option[Int]](None, Some(3), Some(5), None, Some(7))))
+    }
+
+    it("Some Nones") {
+      assertListOptionCmp(None, Option.sequence(List[Option[Int]](None, None, None)))
     }
   }
 }
