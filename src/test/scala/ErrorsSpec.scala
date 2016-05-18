@@ -166,4 +166,34 @@ class ErrorsSpec extends FunSpec {
       assertListOptionCmp(None, Option.sequence(List[Option[Int]](None, None, None)))
     }
   }
+
+  describe("Options - traverse") {
+    it("Empty list") {
+      val func = (x: Int) => { if (x > 0) Some(x) else None }
+      val empty = List[Int]()
+      val emptyOpts = Some(List[Int]())
+      assertListOptionCmp(emptyOpts, Option.traverse(empty)(func))
+    }
+
+    it("Non-empty list - maps all to None") {
+      val func = (x: Int) => { if (x > 0) Some(x) else None }
+      val empty = List[Int](-3, -5, -6)
+      val emptyOpts = Some(List[Int]())
+      assertListOptionCmp(emptyOpts, Option.traverse(empty)(func))
+    }
+
+    it("Non-empty list - maps all to Some") {
+      val func = (x: Int) => { if (x > 0) Some(x) else None }
+      val empty = List[Int](3, 5, 6, 7, 9)
+      val emptyOpts = Some(List[Int](3, 5, 6, 7, 9))
+      assertListOptionCmp(emptyOpts, Option.traverse(empty)(func))
+    }
+
+    it("Non-empty list - maps some to Some, some to None") {
+      val func = (x: Int) => { if (x > 0) Some(x) else None }
+      val empty = List[Int](-3, 5, -6, 7, 9, 0)
+      val emptyOpts = Some(List[Int](5, 7, 9))
+      assertListOptionCmp(emptyOpts, Option.traverse(empty)(func))
+    }
+  }
 }

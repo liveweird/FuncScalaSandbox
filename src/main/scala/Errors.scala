@@ -79,4 +79,19 @@ object Option {
   def sequence[A](a: List[Option[A]]): Option[List[A]] = {
     seqInternal(a, List[A]())
   }
+
+  def traverseInternal[A, B](a: List[A], ctx: List[B])(f: A => Option[B]): List[B] = {
+    a match {
+      case head :: tail =>
+        f(head) match {
+          case Some(b) => traverseInternal(tail, ctx ::: List[B](b))(f)
+          case _ => traverseInternal(tail, ctx)(f)
+        }
+      case _ => ctx
+    }
+  }
+
+  def traverse[A, B](a: List[A])(f: A => Option[B]): Option[List[B]] = {
+    Some(traverseInternal(a, List[B]())(f))
+  }
 }
