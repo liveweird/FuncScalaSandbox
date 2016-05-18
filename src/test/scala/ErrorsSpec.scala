@@ -196,4 +196,8 @@ class ErrorsSpec extends FunSpec {
       assertListOptionCmp(emptyOpts, Option.traverse(empty)(func))
     }
   }
+
+  // 4.6
+  describe("Either - map") {
+  }
 }
