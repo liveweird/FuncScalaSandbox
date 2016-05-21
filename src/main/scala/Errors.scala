@@ -1,7 +1,5 @@
 package net.gebski.FuncScalaSandbox.Chapter4
 
-import scala.annotation.tailrec
-
 import scala.{Option => _, Some => _, Either => _, _}
 
 sealed trait Option[+A] {
@@ -96,9 +94,16 @@ object Option {
   }
 }
 
-trait Either[+E, +A] {
-  def map[B](f: A => B): Either[E, B] = ???
+sealed trait Either[+E, +A] {
+  def map[B](f: A => B): Either[E, B] = {
+    this match {
+      case Left(a) => Left(a)
+      case Right(b) => Right(f(b))
+    }
+  }
   def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B] = ???
   def orElse[EE >: E,B >: A](b: => Either[EE, B]): Either[EE, B] = ???
   def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = ???
 }
+case class Left[+E](value: E) extends Either[E,Nothing]
+case class Right[+A](value: A) extends Either[Nothing, A]

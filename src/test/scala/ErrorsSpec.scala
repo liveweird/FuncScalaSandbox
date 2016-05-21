@@ -1,6 +1,5 @@
 package net.gebski.FuncScalaSandbox.Chapter4
 
-import net.gebski.FuncScalaSandbox.Chapter4.Option
 import org.scalatest.FunSpec
 
 import scala.{Option => _, Some => _, Either => _, _}
@@ -199,5 +198,14 @@ class ErrorsSpec extends FunSpec {
 
   // 4.6
   describe("Either - map") {
+    it("Error maps to error") {
+      val input = Left("dsda")
+      assert(input == input.map[Int]((x: Int) => x + 1))
+    }
+
+    it("Value maps to value") {
+      val input = Right(4)
+      assert(Right(5) == input.map[Int]((x: Int) => x + 1))
+    }
   }
 }
