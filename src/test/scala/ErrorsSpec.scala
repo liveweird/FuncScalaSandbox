@@ -208,4 +208,21 @@ class ErrorsSpec extends FunSpec {
       assert(Right(5) == input.map[Int]((x: Int) => x + 1))
     }
   }
+
+  describe("Either - flatMap") {
+    it("Error maps to error") {
+      val input = Left("dsda")
+      assert(input == input.flatMap[String, Int]((x: Int) => Right(x + 1)))
+    }
+
+    it("Value can map to error as well") {
+      val input = Right(4)
+      assert(Left("buuuu") == input.flatMap[String, Int]((x: Int) => Left("buuuu")))
+    }
+
+    it("Value usually maps to other value") {
+      val input = Right(4)
+      assert(Right(5) == input.flatMap[String, Int]((x: Int) => Right(x + 1)))
+    }
+  }
 }
