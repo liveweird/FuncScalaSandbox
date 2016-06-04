@@ -225,4 +225,26 @@ class ErrorsSpec extends FunSpec {
       assert(Right(5) == input.flatMap[String, Int]((x: Int) => Right(x + 1)))
     }
   }
+
+  describe("Either - orElse") {
+    it("if there's a value straight away, return it") {
+      val input = Right(4)
+      assert(Right(4) == input.orElse[String, Int](Right(5)))
+    }
+
+    it("if it's an error, go for next successful piece") {
+      val input = Left("voom")
+      assert(Right(5) == input.orElse[String, Int](Right(5)))
+    }
+
+    it("if more errors, process until out of errors") {
+      val input = Left("voom")
+      assert(Right(5) == input.orElse[String, Int](Left("noooo")).orElse[String, Int](Right(5)))
+    }
+
+    it("if nothing but errors, return last error") {
+      val input = Left("voom")
+      assert(Left("loool") == input.orElse[String, Int](Left("noooo")).orElse[String, Int](Left("loool")))
+    }
+  }
 }
