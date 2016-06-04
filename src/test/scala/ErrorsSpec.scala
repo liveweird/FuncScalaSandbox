@@ -247,4 +247,26 @@ class ErrorsSpec extends FunSpec {
       assert(Left("loool") == input.orElse[String, Int](Left("noooo")).orElse[String, Int](Left("loool")))
     }
   }
+
+  describe("Either - map2") {
+    it("1st arg error") {
+      val input = Left("error1")
+      assert(Left("error1") == input.map2(Right(4))((x: Int, y: Int) => x + y))
+    }
+
+    it("2nd arg error") {
+      val input = Right(4)
+      assert(Left("error2") == input.map2(Left("error2"))((x: Int, y: Int) => x + y))
+    }
+
+    it("both are errors") {
+      val input = Left("error1")
+      assert(Left("error1") == input.map2(Left("error2"))((x: Int, y: Int) => x + y))
+    }
+
+    it("no error") {
+      val input = Right(4)
+      assert(Right(9) == input.map2(Right(5))((x: Int, y: Int) => x + y))
+    }
+  }
 }
